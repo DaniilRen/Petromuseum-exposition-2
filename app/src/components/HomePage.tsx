@@ -1,6 +1,6 @@
-// HomePage.tsx - главная страница с заголовком и 6 кнопками
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './HomePage.css';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,24 +15,14 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent:'center',
-      height: '100vh',
-      gap: '20px',
-    }}>
-      <h1>Заголовок</h1>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 200px)',
-        gap: '20px'
-      }}>
-        {buttons.map(({id, label}) => (
+    <div className="container">
+      <h1 className="title">Заголовок</h1>
+      <div className="buttonsGrid">
+        {buttons.map(({ id, label }) => (
           <button
             key={id}
-            style={{ fontSize: '1.5rem', padding: '20px', cursor: 'pointer' }}
+            className="button"
+            data-btn={id}
             onClick={() => navigate(`/page/${id}`)}
           >
             {label}

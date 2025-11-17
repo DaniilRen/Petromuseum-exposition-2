@@ -12,21 +12,21 @@ const App: React.FC = () => {
         <Route
           path="/page/1"
           element={
-            <DataVisualizer title="Section 1" tableName="Decembrists_sec_1" type="someType" />
+            <DataVisualizer title="Section 1" tableName="Decembrists_sec_1" type="table" />
           }
         />
 
         <Route
           path="/page/2"
           element={
-            <DataVisualizer title="Section 2" tableName="Addresses_sec_2" type="someType" />
+            <DataVisualizer title="Section 2" tableName="Addresses_sec_2" type="table" />
           }
         />
 
         <Route
           path="/page/3"
           element={
-            <DataVisualizer title="Section 3" tableName="Commemorative_plaques_sec_3" type="someType" />
+            <DataVisualizer title="Section 3" tableName="Commemorative_plaques_sec_3" type="table" />
           }
         />
 
@@ -35,31 +35,24 @@ const App: React.FC = () => {
         <Route
           path="/page/4"
           element={
-            <DataVisualizer title="Section 4" tableName="Decembrists_sec_4" type="someType" />
+            <DataVisualizer title="Section 4" tableName="Decembrists_sec_4" type="slider" />
           }
         />
 
         <Route
           path="/page/5"
           element={
-            <DataVisualizer title="Section 5" tableName="Documents_sec_5" type="someType" />
+            <DataVisualizer title="Section 5" tableName="Documents_sec_5" type="table" />
           }
         />
 
         <Route
-          path="/page/5"
+          path="/page/6"
           element={
-            <DataVisualizer title="Section 6" tableName="Quotes_sec_6" type="someType" />
+            <DataVisualizer title="Section 6" tableName="Quotes_sec_6" type="v" />
           }
         />
 
-        {/* Универсальный маршрут на остальные страницы */}
-        <Route
-          path="/page/:id"
-          element={
-             <DataVisualizer title="Section 5" tableName="Documents_sec_5" type="someType" />
-          } // можно расширить логику поиска по параметрам
-        />
       </Routes>
     </Router>
   );

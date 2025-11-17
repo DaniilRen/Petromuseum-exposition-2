@@ -2,6 +2,7 @@ import { app } from 'electron';
 import path from 'path';
 import Datastore from 'nedb-promises';
 import fs from 'fs/promises';
+import { fileURLToPath } from 'url';
 
 
 // Interfaces for all tables:
@@ -150,6 +151,9 @@ export class AppDatabase {
 
 
   async loadDataIfEmpty() {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
     if (await this.isEmpty(this.Decembrists_sec_1)) {
       const jsonPath = path.join(__dirname, '..', 'public', 'data', 'tables.json');
       await this.importDataFromJson(jsonPath);

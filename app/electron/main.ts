@@ -4,8 +4,10 @@ import { db } from '../src/db.ts';
 import { fileURLToPath } from 'url';
 
 function createWindow() {
+
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
+  
 
   const win = new BrowserWindow({
     width: 800,
