@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import './TableSlider.css';
 
 interface Row {
   id: string;
@@ -13,26 +14,32 @@ interface TableSliderProps {
   rows: Row[];
 }
 
-const GroupTable: React.FC<{ groupName: string; rows: Row[] }> = ({ groupName, rows }) => {
-  return (
-    <div style={{ width: '100%', maxWidth: 600, margin: '0 auto' }}>
-      <h3 style={{ textAlign: 'center', marginBottom: '1rem' }}>{groupName}</h3>
-      <div style={{ maxHeight: 300, overflowY: 'auto', border: '1px solid #ccc', borderRadius: 4 }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <tbody>
-            {rows.map((row, idx) => (
-              <tr key={row.id ?? `${row.group}-${idx}`}  style={{ borderBottom: '1px solid #eee' }}>
-                <td style={{ padding: '8px', borderRight: '1px solid #eee' }}>{row.info}</td>
-                <td style={{ padding: '8px', borderRight: '1px solid #eee' }}>{row.address}</td>
-                <td style={{ padding: '8px' }}>{row.topography}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+const GroupTable: React.FC<{ groupName: string; rows: Row[] }> = ({ groupName, rows }) => (
+  <div className="groupTableContainer">
+    <h3 className="groupTitle">{groupName}</h3>
+    <div className="groupTableWrapper">
+      <table className="groupTable">
+        <thead>
+          <tr>
+            <th className="groupTableCell groupTableCellBorder">Декабрист</th>
+            <th className="groupTableCell groupTableCellBorder">Адреса проживания</th>
+            <th className="groupTableCell">Топография по ППК</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, idx) => (
+            <tr key={row.id ?? idx} className="groupTableRow">
+              <td className="groupTableCell groupTableCellBorder">{row.info}</td>
+              <td className="groupTableCell groupTableCellBorder">{row.address}</td>
+              <td className="groupTableCell">{row.topography}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  );
-};
+  </div>
+);
+
 
 const TableSlider: React.FC<TableSliderProps> = ({ rows }) => {
   const groups = useMemo(() => {
@@ -45,7 +52,6 @@ const TableSlider: React.FC<TableSliderProps> = ({ rows }) => {
   }, [rows]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < groups.length - 1;
 
@@ -63,39 +69,33 @@ const TableSlider: React.FC<TableSliderProps> = ({ rows }) => {
 
   if (groups.length === 0) return <div>No data</div>;
 
-  const [groupName, groupRows] = groups[currentIndex];
-
   return (
-    <div style={{ maxWidth: 700, margin: '0 auto' }}>
-      {/* Go Back Button */}
-      <button
-        onClick={() => window.history.back()}
-        style={{
-          marginBottom: '1rem',
-          cursor: 'pointer',
-          fontSize: '16px',
-          padding: '8px 16px',
-          borderRadius: 4,
-          border: '1px solid #ccc',
-          backgroundColor: '#f9f9f9',
-          alignSelf: 'flex-start',
-        }}
-        aria-label="Go back"
-      >
+    <div className="tableSliderContainer">
+      <button onClick={handleGoBack} className="goBackButton" aria-label="Go back">
         ← Go Back
       </button>
 
-      {/* Navigation Arrows */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-        <button onClick={handlePrev} disabled={!canGoPrev} aria-label="Previous group">
+      <div className="navigationButtons">
+        <button onClick={handlePrev} disabled={!canGoPrev} className="navButton" aria-label="Previous group">
           ← Prev
         </button>
-        <button onClick={handleNext} disabled={!canGoNext} aria-label="Next group">
+        <button onClick={handleNext} disabled={!canGoNext} className="navButton" aria-label="Next group">
           Next →
         </button>
       </div>
 
-      <GroupTable groupName={groupName} rows={groupRows} />
+      <div className="slidingContainer">
+        <div
+          className="slidingContent"
+          style={{ width: `${groups.length * 100}%`, transform: `translateX(-${currentIndex * (100 / groups.length)}%)` }}
+        >
+          {groups.map(([groupName, groupRows]) => (
+            <div key={groupName} className="groupTableContainer" style={{ width: `${100 / groups.length}%` }}>
+              <GroupTable groupName={groupName} rows={groupRows} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

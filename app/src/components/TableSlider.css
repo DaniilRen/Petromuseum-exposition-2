@@ -1,0 +1,89 @@
+/* TableSlider.css */
+
+.tableSliderContainer {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.goBackButton {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  align-self: flex-start;
+}
+
+.navigationButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.navButton {
+  cursor: pointer;
+  font-size: 24px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  user-select: none;
+}
+
+.navButton:disabled {
+  cursor: default;
+  background-color: #ddd;
+}
+
+.slidingContainer {
+    margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.slidingContent {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.groupTableContainer {
+  width: 100%;
+  flex-shrink: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.groupTitle {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.groupTableWrapper {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.groupTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.groupTableRow {
+  border-bottom: 1px solid #eee;
+}
+
+.groupTableCell {
+  padding: 8px;
+}
+
+.groupTableCellBorder {
+  border-right: 1px solid #eee;
+}
