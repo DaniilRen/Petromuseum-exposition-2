@@ -1,0 +1,20 @@
+.back-arrow {
+	position: absolute;
+	left: 0;
+	top: 0;
+	cursor: 'pointer';
+	font-size: var(--back-button-font-size);
+	transform: rotate(180deg);
+	padding: 0px 10px;
+	margin: 10px 20px;
+	border-radius: var(--default-radius);
+	background-color: var(--white);
+	transition: var(--transition);
+}
+
+.back-arrow:focus,
+.back-arrow:hover {
+	background-color: var(--gray);
+	scale: 0.9;
+	border: 2px solid var(--black);
+}

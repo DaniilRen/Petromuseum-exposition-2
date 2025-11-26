@@ -1,0 +1,27 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border-radius: var(--default-radius);
+	justify-content: center;
+	align-self: center;
+	width: 75vw;
+	margin: 0 auto;
+	background-color: var(--gray);
+}
+
+.img-holder {
+	display: flex;
+	flex-direction: column;
+	border-radius: var(--default-radius);
+	justify-content: center;
+	align-self: center;
+	background-color: aqua;
+	height: 500px;
+}
+
+img {
+	max-width: 30%;        /* or a fixed width like 300px */
+  height: auto;       /* keeps height proportional */
+  display: block;     /* remove whitespace below image */
+  object-fit: contain
+}

@@ -1,103 +1,107 @@
 .container {
+	background-color: var(--white);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 98vh;
   gap: 3rem;
-  background-color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #222;
-  padding: 0 1rem;
-  box-sizing: border-box;
+	font-family: var(--usual-font);
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #111;
+	font-family: var(--fancy-font);
+  font-size: var(--title-size);
+  color: var(--black);
   user-select: none;
   margin: 0;
 }
 
 .buttonsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, 100px);
-  gap: 1.5rem 3rem;
-  min-width: 400px; /* increase width to make buttons wider */
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(3, 100px);
+	gap: 1.5rem 3rem;
 }
 
 .button {
-  position: relative;
-  overflow: hidden;
-  background-color: #fff;
-  border: 2px solid #222;
-  color: #222;
-  font-size: 1.5rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  user-select: none;
-  padding: 0;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s ease, border-color 0.3s ease;
-  width: 290px; /* set explicit width slightly less than half grid width */
+	font-family: inherit;
+	position: relative;
+	overflow: hidden;
+	background-color: inherit;
+	font-size: var(--button-font-size);
+	border-radius: var(--default-radius);
+	text-transform: uppercase;
+	cursor: pointer;
+	user-select: none;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: var(--transition);
+	/* transition: color 0.3s ease, border-color 0.3s ease; */
+	width: 390px; 
 }
 
 .button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  /* background-size: cover; */
-  background-position: center;
-  transition: left 0.5s ease;
-  z-index: 0;
-  /* Add semi-transparent overlay to simulate 0.4 opacity */
-  background-color: rgba(255, 255, 255, 0.6); /* light overlay for brightness */
-  mix-blend-mode: multiply; /* makes image a bit darker with overlay */
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	transition: left 0.5s ease;
+	z-index: 0;
+	background-color: rgba(255, 255, 255, 0.6); 
 }
 
-/* When hovered, slide background in */
+.button::before {
+	filter: opacity(0.3); 
+}
+
 .button:hover::before,
 .button:focus::before {
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.6); /* ensure overlay stays */
-  filter: opacity(0.4); /* set image opacity */
+	left: -100%;
 }
 
 
 .button:hover,
 .button:focus {
-  /* color: #fff; */
-  /* border-color: #fff; */
+	scale: 0.9;
   outline: none;
   z-index: 1;
+}
+
+span {
+	z-index: 1;
+	font-weight: 900;
 }
 
 
 /* Dynamically set background images per button id using attribute selector */
 .button[data-btn="1"]::before {
+	border-radius: var(--default-radius);
   background-image: url('../../public/images/homepage/page1.jpg');
 }
 .button[data-btn="2"]::before {
+	border-radius: var(--default-radius);
   background-image: url('../../public/images/homepage/page2.jpg');
 }
 .button[data-btn="3"]::before {
+	border-radius: var(--default-radius);
   background-image: url('../../public/images/homepage/page3.jpg');
 }
 .button[data-btn="4"]::before {
+	border-radius: var(--default-radius);
   background-image: url('../../public/images/homepage/page4.jpg');
 }
 .button[data-btn="5"]::before {
+	border-radius: var(--default-radius);
   background-image: url('../../public/images/homepage/page5.jpg');
 }
 .button[data-btn="6"]::before {
+	border-radius: var(--default-radius);
   background-image: url('../../public/images/homepage/page6.jpg');
 }

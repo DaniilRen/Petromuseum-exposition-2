@@ -2,28 +2,29 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { db } from '../src/db.ts';
 import { fileURLToPath } from 'url';
+import { readdir } from 'fs/promises';
 
 function createWindow() {
 
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  
+	const __filename = fileURLToPath(import.meta.url);
+	const __dirname = path.dirname(__filename);
 
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // preload script for contextBridge APIs
-      contextIsolation: true,
-      nodeIntegration: false,
-    },
-  });
 
-  win.loadURL('http://localhost:3000'); // React dev server URL
-  // win.loadFile('build/index.html'); // Uncomment for production build
+	const win = new BrowserWindow({
+		width: 1280,
+		height: 1024,
+		webPreferences: {
+			preload: path.join(__dirname, 'preload.js'), // preload script for contextBridge APIs
+			contextIsolation: true,
+			nodeIntegration: false,
+		},
+	});
 
-  win.webContents.openDevTools();
-}
+	win.loadURL('http://localhost:3000'); 
+	// win.loadFile('build/index.html'); // Uncomment for production build
+
+	win.webContents.openDevTools();
+	}
 
 app.whenReady().then(async () => {
   await db.loadDataIfEmpty(); // Load initial data if DB empty
@@ -56,4 +57,17 @@ ipcMain.handle('update-row', async (_event, tableName: string, row: any) => {
 ipcMain.handle('delete-row', async (_event, tableName: string, id: string) => {
   // @ts-ignore
   return db.deleteRow(db[tableName], id);
+});
+
+ipcMain.handle('get-history-document-images', async (_event, prefix: string) => {
+	const __filename = fileURLToPath(import.meta.url);
+	const dirname = path.dirname(__filename)
+	const dirPath = path.join(dirname, '..', 'public', 'images', 'history_documents');
+	try {
+		const files = await readdir(dirPath);
+		return files.filter(file => file.startsWith(prefix+'_'));
+	} catch (err) {
+		console.error('Error reading directory:', err);
+		return [];
+	}
 });

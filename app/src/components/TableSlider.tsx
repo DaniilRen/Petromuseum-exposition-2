@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import './TableSlider.css';
+import ArrowBack from './buttons/ArrowBack';
 
 interface Row {
   id: string;
@@ -63,17 +64,11 @@ const TableSlider: React.FC<TableSliderProps> = ({ rows }) => {
     if (canGoNext) setCurrentIndex(currentIndex + 1);
   };
 
-  const handleGoBack = () => {
-    window.history.back();
-  };
-
   if (groups.length === 0) return <div>No data</div>;
 
   return (
     <div className="tableSliderContainer">
-      <button onClick={handleGoBack} className="goBackButton" aria-label="Go back">
-        ← Go Back
-      </button>
+				{<ArrowBack />}
 
       <div className="navigationButtons">
         <button onClick={handlePrev} disabled={!canGoPrev} className="navButton" aria-label="Previous group">

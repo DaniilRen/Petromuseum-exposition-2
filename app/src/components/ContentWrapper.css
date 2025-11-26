@@ -1,0 +1,8 @@
+.slider-holder {
+	height: 96vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	/* align-items: center; */
+}
