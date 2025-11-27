@@ -1,27 +1,32 @@
 .card {
+	animation: var(--fade-up-animation);
 	display: flex;
 	flex-direction: column;
 	border-radius: var(--default-radius);
-	justify-content: center;
-	align-self: center;
-	width: 75vw;
+	font-family: var(--usual-font);
+	width: 60vw;
+	height: 90vh;
 	margin: 0 auto;
-	background-color: var(--gray);
+	/* background-color: var(--gray);	 */
 }
 
 .img-holder {
 	display: flex;
 	flex-direction: column;
-	border-radius: var(--default-radius);
+	border-radius: inherit;
 	justify-content: center;
-	align-self: center;
-	background-color: aqua;
-	height: 500px;
+	align-items: center;
+	/* background-color: aqua; */
+	height: 90%;
 }
 
 img {
-	max-width: 30%;        /* or a fixed width like 300px */
-  height: auto;       /* keeps height proportional */
-  display: block;     /* remove whitespace below image */
-  object-fit: contain
+	border-radius: inherit;
+	width: auto;
+	height: 90%;      
+}
+
+.text-holder {
+	text-align: center;
+	/* background-color: aquamarine; */
 }

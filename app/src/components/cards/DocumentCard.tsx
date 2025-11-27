@@ -33,9 +33,10 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ prefix, info }) => {
 					</div>
 				))}
 			</HorizontalSlider> */}
-			<img src={'/images/history_documents/'+images[0]} alt={images[0]} />
+			<div key={images[0]} className="img-holder">
+				<img src={'/images/history_documents/'+images[0]} alt={images[0]} />
+			</div>
 			<div className="text-holder">
-				<p>{prefix}</p>
 				<p>{info}</p>
 			</div>
 		</div>

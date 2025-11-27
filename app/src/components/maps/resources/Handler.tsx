@@ -1,0 +1,41 @@
+import React, { useState } from 'react';
+import FortressBuildingCard from '../../cards/FortressBuildingCard';
+import './Handler.css';
+import toggleArrowButton from '../../../utils';
+
+
+interface HandlerProps {
+	groupName: string;
+	resource: string;
+	left: number;
+	top: number;
+}
+
+const Handler: React.FC<HandlerProps> = ({ groupName, resource, left, top }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleClick = () => {
+		toggleArrowButton();
+    setIsVisible(!isVisible);
+  };
+
+  const handleClose = () => {
+		toggleArrowButton();
+    setIsVisible(false);
+  };
+
+  return (
+    <div className="handler-holder" style={{ top: top, left: left }}>
+      <img
+        onClick={handleClick}
+        className="handler-resource"
+        src={resource}
+        alt={resource}
+        style={{ top: top, left: left }}
+      />
+      {isVisible && <FortressBuildingCard group={groupName}onClose={handleClose} />}
+    </div>
+  );
+};
+
+export default Handler;

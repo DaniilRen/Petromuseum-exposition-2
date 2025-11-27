@@ -16,13 +16,11 @@ const HorizontalSlider: React.FC<HorizontalSliderProps> = ({ children }) => {
 	};
 
 	return (
-		<div style={{ width: '100%'}}>
-			<Slider {...settings}>
-				{children.map((child, index) => (
-					<div key={index}>{child}</div>
-				))}
-			</Slider>
-		</div>
+		<Slider {...settings}>
+			{children.map((child, index) => (
+				<div key={index}>{child}</div>
+			))}
+		</Slider>
 	);
 };
 

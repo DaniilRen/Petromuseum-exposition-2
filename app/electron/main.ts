@@ -71,3 +71,4 @@ ipcMain.handle('get-history-document-images', async (_event, prefix: string) => 
 		return [];
 	}
 });
+

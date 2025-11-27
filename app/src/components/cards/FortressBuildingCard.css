@@ -1,0 +1,24 @@
+.building-card {
+	user-select: none;
+	position: absolute;
+	padding-top: 50px;
+	width: 88vw;
+	height: 82vh;
+	background-color: var(--white);
+	border-radius: var(--default-radius);
+	animation: var(--fade-up-animation);
+}
+
+.fade-wrapper {
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 0; 
+	top: 0;
+	position: fixed;
+  width: 100vw;
+  height: 100vh;
+	background-color: rgba(100, 100, 100, 0.5);
+	backdrop-filter: blur(8px);
+}

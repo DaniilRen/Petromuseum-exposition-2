@@ -3,9 +3,13 @@ import Table from './Table';
 import FortressMap from './maps/FortressMap';
 import CityMap from './maps/CityMap';
 import VerticalSlider from './sliders/VerticalSlider';
+import HorizontalSlider from './sliders/HorizontalSlider'
+import ScrollPointer from './pointers/ScrollPointer'
 import DocumentCard from './cards/DocumentCard';
 import ArrowBack from './buttons/ArrowBack';
 import './ContentWrapper.css'
+import QuoteCard from './cards/QuoteCard';
+import DecembristInfoCard from './cards/DecembristInfoCard';
 
 
 interface WrapperProps {
@@ -20,7 +24,14 @@ const ContentWrapper: React.FC<WrapperProps> = ({ tableName, content_type }) => 
 		(async () => {
 			try {
 				const data = await window.electronAPI.getRows(tableName);
-				setRows(data);
+				if (tableName === "Quotes_sec_6" || tableName === "Decembrists_sec_4") {
+					const unique_groups = [...new Set( data.map(row => row['group']) )];
+					// console.log(unique_groups)
+					setRows(unique_groups);
+				}
+				else {
+					setRows(data);
+				}
 			} catch (err) {
 				console.error('Error fetching data:', err);
 			}
@@ -30,12 +41,28 @@ const ContentWrapper: React.FC<WrapperProps> = ({ tableName, content_type }) => 
 	switch (content_type) {
 		case "fortress-map":
 			return <FortressMap />
+
 		case "city-map":
 			return <CityMap />
-		case "vertical-slider":
+
+		case "decembrists":
+			return (
+				<div className="slider-holder">
+					<ArrowBack />
+					<ScrollPointer direction="horizontal" />
+					<HorizontalSlider>
+						{rows.map((group_name) => (
+							<DecembristInfoCard group={group_name} />
+						))}
+					</HorizontalSlider>
+				</div>
+			)
+
+		case "documents":
 			return (
 				<div className='slider-holder'>
 					<ArrowBack />
+					<ScrollPointer direction="vertical" />
 					<VerticalSlider>
 						{rows.map((row) => (
 							<DocumentCard info={row.info} prefix={row.image_name} />
@@ -43,8 +70,20 @@ const ContentWrapper: React.FC<WrapperProps> = ({ tableName, content_type }) => 
 					</VerticalSlider>
 				</div>
 			)
-		case "table":
-			return <Table title="Table name not set" rows={rows} />;
+
+		case "quotes":
+			return (
+				<div className="slider-holder">
+					<ArrowBack />
+					<ScrollPointer direction="horizontal" />
+					<HorizontalSlider>
+						{rows.map((group_name) => (
+							<QuoteCard group={group_name} />
+						))}
+					</HorizontalSlider>
+				</div>
+			)
+
 		default:
 			return <div />;
 	}

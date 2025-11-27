@@ -18,13 +18,11 @@ const VerticalSlider: React.FC<VerticalSliderProps> = ({ children }) => {
 	};
 
 	return (
-		<div style={{  }}>
-			<Slider {...settings}>
-				{children.map((child, index) => (
-					<div key={index}>{child}</div>
-				))}
-			</Slider>
-		</div>
+		<Slider {...settings}>
+			{children.map((child, index) => (
+				<div key={index}>{child}</div>
+			))}
+		</Slider>
 	);
 };
 

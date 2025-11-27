@@ -1,11 +1,10 @@
 .map-holder {
+	overflow: hidden;
 	height: 98vh;
 	border-radius: var(--default-radius);
-	background-color: #d8d8d8;
 }
 
 .map {
 	border-radius: inherit;
 	height: 100%;
-	background-color: #ffbdbd;
 }

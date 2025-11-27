@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 // Interfaces for all tables:
 interface Decembrist1 {
   id?: string;
+	group: string;
   name: string;
   info: string;
 }
@@ -55,35 +56,37 @@ export class AppDatabase {
 	Quotes_sec_6: Datastore<Quote6>;
 
 	constructor() {
-		const userDataPath = app.getPath('userData');
+		const __filename = fileURLToPath(import.meta.url);
+		const __dirname = path.dirname(__filename);
+		const table_dir = path.join(__dirname, '..', 'storage')
 
 		this.Decembrists_sec_1 = Datastore.create({
-			filename: path.join(userDataPath, 'Decembrists_sec_1.db'),
+			filename: path.join(table_dir, 'Decembrists_sec_1.db'),
 			autoload: true,
 			timestampData: true,
 		});
 		this.Addresses_sec_2 = Datastore.create({
-			filename: path.join(userDataPath, 'Addresses_sec_2.db'),
+			filename: path.join(table_dir, 'Addresses_sec_2.db'),
 			autoload: true,
 			timestampData: true,
 		});
 		this.Commemorative_plaques_sec_3 = Datastore.create({
-			filename: path.join(userDataPath, 'Commemorative_plaques_sec_3.db'),
+			filename: path.join(table_dir, 'Commemorative_plaques_sec_3.db'),
 			autoload: true,
 			timestampData: true,
 		});
 		this.Decembrists_sec_4 = Datastore.create({
-			filename: path.join(userDataPath, 'Decembrists_sec_4.db'),
+			filename: path.join(table_dir, 'Decembrists_sec_4.db'),
 			autoload: true,
 			timestampData: true,
 		});
 		this.Documents_sec_5 = Datastore.create({
-			filename: path.join(userDataPath, 'Documents_sec_5.db'),
+			filename: path.join(table_dir, 'Documents_sec_5.db'),
 			autoload: true,
 			timestampData: true,
 		});
 		this.Quotes_sec_6 = Datastore.create({
-			filename: path.join(userDataPath, 'Quotes_sec_6.db'),
+			filename: path.join(table_dir, 'Quotes_sec_6.db'),
 			autoload: true,
 			timestampData: true,
 		});
@@ -113,12 +116,10 @@ export class AppDatabase {
 			}
 
 			for (const row of rows) {
-				// If your NeDB expects objects, convert arrays to objects here
-				// Example for Decembrists_sec_1 rows: { name: row[0], info: row[1] }
 				let doc;
 				switch (tableName) {
 					case 'Decembrists_sec_1':
-						doc = { name: row[0], info: row[1] };
+						doc = { group: row[0], name: row[1], info: row[2] };
 						break;
 					case 'Addresses_sec_2':
 						doc = { group: row[0], address: row[1], info: row[2] };
@@ -138,7 +139,7 @@ export class AppDatabase {
 						doc = { image_name: row[0], info: row[1] };
 						break;
 					case 'Quotes_sec_6':
-						doc = { group: row[0], author: row[1], text: row[2] };
+						doc = { group: row[0], text: row[1], author: row[2] };
 						break;
 					default:
 						doc = row; // fallback

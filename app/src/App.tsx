@@ -30,19 +30,19 @@ const App: React.FC = () => {
 				<Route
 					path="/page/4"
 					element={
-						<ContentWrapper tableName="Decembrists_sec_4" content_type="vertical-slider	" />
+						<ContentWrapper tableName="Decembrists_sec_4" content_type="decembrists" />
 					}
 				/>
 				<Route
 					path="/page/5"
 					element={
-						<ContentWrapper tableName="Documents_sec_5" content_type="vertical-slider" />
+						<ContentWrapper tableName="Documents_sec_5" content_type="documents" />
 					}
 				/>
 				<Route
 					path="/page/6"
 					element={
-						<ContentWrapper tableName="Quotes_sec_6" content_type="vertical-slider" />
+						<ContentWrapper tableName="Quotes_sec_6" content_type="quotes" />
 					}
 				/>
 			</Routes>

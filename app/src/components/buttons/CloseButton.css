@@ -1,4 +1,4 @@
-.back-arrow {
+.close-button {
 	user-select: none;
 	z-index: 1;
 	position: absolute;
@@ -14,13 +14,13 @@
 	transition: var(--transition);
 }
 
-.back-arrow:focus,
-.back-arrow:hover {
+.close-button:focus,
+.close-button:hover {
 	background-color: var(--gray);
 	scale: 0.9;
 	border: 2px solid var(--black);
 }
 
-.back-arrow:focus {
+.close-button:focus {
 	background-color: #8f8f8f
 }

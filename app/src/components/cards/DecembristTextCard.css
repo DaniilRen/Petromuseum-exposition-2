@@ -1,0 +1,21 @@
+.decembrist-text {
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 40px;
+	font-family: var(--usual-font);
+	background-color: #ececec;
+	border-radius: inherit;
+	scroll-snap-align: start;
+}
+
+.info,
+.address,
+.topography {
+	font-size: var(--usual-size);
+	font-family: var(--fancy-font);
+}
+
+.info {
+	font-family: var(--usual-font);
+}

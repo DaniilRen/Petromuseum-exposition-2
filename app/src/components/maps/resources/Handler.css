@@ -1,0 +1,15 @@
+.handler-holder {
+	user-select: none;
+	position: absolute;
+}
+
+.handler-resource {
+	/* opacity: 0.8; */
+	/* filter: grayscale(); */
+}
+
+.handler-resource:hover {
+	transition: var(--transition);
+	scale: 1.1;
+	filter: drop-shadow(0 0 20px var(--blue));
+}

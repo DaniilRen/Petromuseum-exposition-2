@@ -1,0 +1,15 @@
+.pointer {
+	user-select: none;
+	position: fixed;
+	font-size: var(--pointer-font-size);
+	opacity: 0.2;
+}
+
+.vertical {
+	right: 5%;
+}
+
+.horizontal {
+	left: 46%;
+	top: -2%;
+}
