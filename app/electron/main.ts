@@ -14,14 +14,14 @@ function createWindow() {
 		width: 1280,
 		height: 1024,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js'), // preload script for contextBridge APIs
+			preload: path.join(__dirname, 'preload.js'), // preload script for contextBridge API
 			contextIsolation: true,
 			nodeIntegration: false,
 		},
 	});
 
 	win.loadURL('http://localhost:3000'); 
-	// win.loadFile('build/index.html'); // Uncomment for production build
+	// win.loadFile('build/index.html');
 
 	win.webContents.openDevTools();
 	}

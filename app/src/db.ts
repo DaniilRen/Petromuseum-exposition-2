@@ -1,4 +1,3 @@
-import { app } from 'electron';
 import path from 'path';
 import Datastore from 'nedb-promises';
 import fs from 'fs/promises';

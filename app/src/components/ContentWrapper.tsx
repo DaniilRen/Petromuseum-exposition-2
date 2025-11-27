@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Table from './Table';
 import FortressMap from './maps/FortressMap';
 import CityMap from './maps/CityMap';
 import VerticalSlider from './sliders/VerticalSlider';

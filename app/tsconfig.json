@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react", // или "react-jsx" для новых версий React
+    "jsx": "react", 
     "module": "esnext",
     "target": "es6",
     "moduleResolution": "node",

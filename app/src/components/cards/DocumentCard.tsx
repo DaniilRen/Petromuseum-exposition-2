@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import HorizontalSlider from '../sliders/HorizontalSlider';
 import './DocumentCard.css'
 
 
@@ -26,13 +25,6 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ prefix, info }) => {
 
 	return (
 		<div className="card" key={prefix}>
-			{/* <HorizontalSlider>
-				{images.map((img, index) => (
-					<div key={img} className="img-holder">
-						<img src={`/images/history_documents/${img}`} alt={img} />
-					</div>
-				))}
-			</HorizontalSlider> */}
 			<div key={images[0]} className="img-holder">
 				<img src={'/images/history_documents/'+images[0]} alt={images[0]} />
 			</div>
