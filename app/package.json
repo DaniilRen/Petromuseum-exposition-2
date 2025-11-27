@@ -36,7 +36,9 @@
     "win": {
       "target": "nsis"
     },
+		"extends": null,
     "files": [
+			"electron/main.ts",
       "build/**/*",
       "electron/**/*",
       "src/**/*",
