@@ -26,7 +26,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ prefix, info }) => {
 	return (
 		<div className="card" key={prefix}>
 			<div key={images[0]} className="img-holder">
-				<img src={'/images/history_documents/'+images[0]} alt={images[0]} />
+				<img src={`${process.env.PUBLIC_URL}/images/history_documents/${images[0]}`} alt={images[0]} />
 			</div>
 			<div className="text-holder">
 				<p>{info}</p>

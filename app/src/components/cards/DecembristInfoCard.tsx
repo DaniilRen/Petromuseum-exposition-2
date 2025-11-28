@@ -14,9 +14,7 @@ const DecembristInfoCard: React.FC<DecembristInfoCardProps> = ({ group }) => {
 		(async () => {
 			try {
 				const decembrists = await window.electronAPI.getRows("Decembrists_sec_4");
-				console.log(decembrists)
 				const filtered_decembrists: Object[] = decembrists.filter(decembrist => decembrist.group === group);
-				console.log(filtered_decembrists)
 				setDecembrists(filtered_decembrists);
 			} catch (err) {
 				console.error('Error fetching data:', err);

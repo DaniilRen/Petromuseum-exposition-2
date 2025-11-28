@@ -1,6 +1,6 @@
 import path from 'path';
 import Datastore from 'nedb-promises';
-import fs from 'fs/promises';
+import * as fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 
 

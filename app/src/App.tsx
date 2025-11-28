@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import ContentWrapper from './components/ContentWrapper';
 import './global.css';
 
 const App: React.FC = () => {
 	return (
-		<Router>
+		<HashRouter>
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route
@@ -46,7 +46,7 @@ const App: React.FC = () => {
 					}
 				/>
 			</Routes>
-		</Router>
+		</HashRouter>
 	);
 };
 
