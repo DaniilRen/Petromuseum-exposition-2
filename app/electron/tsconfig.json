@@ -2,17 +2,17 @@
   "compilerOptions": {
     "target": "es2020",
     "module": "es2020",
-    "lib": ["es2020", "dom"],
-    "outDir": "./dist",
+    "moduleResolution": "node",
+    "outDir": "../dist/electron",
     "rootDir": "..",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "types": ["node", "electron"],
-		"allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "types": ["node"],
+    "lib": ["es2020", "dom"],
+		"skipLibCheck": true
   },
-  "include": [
-    "**/*.ts"
-  ]
+  "include": ["."]
 }

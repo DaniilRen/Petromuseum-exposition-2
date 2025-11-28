@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { db } from '../src/db.ts';
+import { db } from '../src/db';
 import { fileURLToPath } from 'url';
 import { readdir } from 'fs/promises';
 
