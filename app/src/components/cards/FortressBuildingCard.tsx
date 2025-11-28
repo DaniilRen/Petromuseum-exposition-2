@@ -30,6 +30,8 @@ const FortressBuildingCard: React.FC<FortressBuildingCardProps> = ({ group, onCl
 			<div className="building-card" key={group}>
 				<CloseButton onClick={onClose} />
 				<h2 className="group-name">{group}</h2>
+				<div className="hline"></div>
+				<p className="desc">Декабристы, которые здесь находились</p>
 				<div className="decembrists-holder">
 					{decembrists.map(decembrist => (
 						<DecembristTopographyCard key={decembrist['name']} name={decembrist['name']} info={decembrist['info']} />

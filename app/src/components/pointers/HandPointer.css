@@ -1,0 +1,32 @@
+.hand-pointer-holder {
+	opacity: 0.7;
+	user-select: none;
+	z-index: 1;
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	background-color: var(--white);
+	border-radius: var(--default-radius);
+	width: 200px;
+	height: 70px;
+	border: 1px solid var(--black);
+}
+
+.hand-pointer-grid {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hand-icon-holder {
+	position: relative;
+	width: 50%;
+}
+
+.hand-icon-holder img {
+	max-width: 80%;
+}
+
+.hand-pointer-sign {
+	/* font-size: var(--usual-size); */
+}

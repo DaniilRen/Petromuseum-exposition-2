@@ -22,3 +22,9 @@
 	background-color: rgba(100, 100, 100, 0.5);
 	backdrop-filter: blur(8px);
 }
+
+.desc {
+	text-align: center;
+	margin-bottom: 60px;
+	font-size: var(--sub-title-size);
+}

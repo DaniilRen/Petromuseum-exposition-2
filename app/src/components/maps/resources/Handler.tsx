@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FortressBuildingCard from '../../cards/FortressBuildingCard';
 import './Handler.css';
-import toggleArrowButton from '../../../utils';
+import toggleElementVisibility from '../../../utils';
 
 
 interface HandlerProps {
@@ -15,12 +15,14 @@ const Handler: React.FC<HandlerProps> = ({ groupName, resource, left, top }) => 
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
-		toggleArrowButton();
+		toggleElementVisibility('back-arrow');
+		toggleElementVisibility('hand-pointer-holder');
     setIsVisible(!isVisible);
   };
 
   const handleClose = () => {
-		toggleArrowButton();
+		toggleElementVisibility('back-arrow');
+		toggleElementVisibility('hand-pointer-holder');
     setIsVisible(false);
   };
 

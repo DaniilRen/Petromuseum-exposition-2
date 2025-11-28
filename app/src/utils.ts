@@ -1,13 +1,12 @@
-const toggleArrowButton = () => {
-	const arrowBack = document.querySelector('.back-arrow') as HTMLElement | null;
-	if (arrowBack) {
-		if (arrowBack.style.display === 'none') {
-			arrowBack.style.display = 'block';
+const toggleElementVisibility = (element_class: string) => {
+	const element = document.querySelector(`.${element_class}`) as HTMLElement | null;
+	if (element) {
+		if (element.style.display === 'none') {
+			element.style.display = 'block';
 		} else {
-			arrowBack.style.display = 'none';
+			element.style.display = 'none';
 		}
 	}
 };
 
-
-export default toggleArrowButton;
+export default toggleElementVisibility;

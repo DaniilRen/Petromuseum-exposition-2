@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { db } from '../src/db';
+import { db } from '../src/db.ts';
 import { fileURLToPath } from 'url';
 import { readdir } from 'fs/promises';
 
@@ -20,9 +20,8 @@ function createWindow() {
 		},
 	});
 
-	// win.loadURL('http://localhost:3000'); 
-		// win.loadFile('build/index.html');
-	win.loadURL(`file://${__dirname}/../build/index.html`);
+	win.loadURL('http://localhost:3000'); 
+	// win.loadURL(`file://${__dirname}/../build/index.html`);
 
 	win.webContents.openDevTools();
 	}

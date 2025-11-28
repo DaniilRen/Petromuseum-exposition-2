@@ -30,6 +30,15 @@ html {
 	scroll-behavior: smooth;
 }
 
+.hline {
+	margin: 0 auto;
+	width: 300px;
+	height: 1px;
+	background-color: var(--black);
+	border-radius: var(--default-radius);
+	opacity: 0.4;
+}
+
 
 @keyframes fadeInUp {
 	from {
