@@ -1,7 +1,7 @@
 .building-card {
 	user-select: none;
-	position: absolute;
 	padding-top: 50px;
+	overflow-y: auto;
 	width: 88vw;
 	height: 82vh;
 	background-color: var(--white);
@@ -10,7 +10,6 @@
 }
 
 .fade-wrapper {
-	z-index: 1000;
 	display: flex;
 	justify-content: center;
 	align-items: center;

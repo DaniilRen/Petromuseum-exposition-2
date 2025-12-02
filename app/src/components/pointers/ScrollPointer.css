@@ -2,7 +2,7 @@
 	user-select: none;
 	position: fixed;
 	font-size: var(--pointer-font-size);
-	opacity: 0.2;
+	opacity: 0.3;
 }
 
 .vertical {

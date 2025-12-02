@@ -4,7 +4,7 @@
 	flex-direction: column;
 	margin-bottom: 40px;
 	font-family: var(--usual-font);
-	background-color: #ececec;
+	background-color: var(--white);
 	border-radius: inherit;
 	scroll-snap-align: start;
 

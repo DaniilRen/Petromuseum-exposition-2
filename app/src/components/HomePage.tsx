@@ -16,7 +16,11 @@ const HomePage: React.FC = () => {
 
 	return (
 		<div className="container">
-			<h1 className="title">Петербург декабристов</h1>
+			<div className="poster">
+				<div className="line line-1">ВЫСТАВКА</div>
+				<div className="line line-2">ПЕТЕРБУРГ</div>
+				<div className="line line-3">ДЕКАБРИСТОВ</div>
+			</div>
 			<div className="buttonsGrid">
 				{buttons.map(({ id, label }) => (
 					<button

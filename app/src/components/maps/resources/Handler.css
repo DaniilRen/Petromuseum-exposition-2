@@ -1,15 +1,15 @@
 .handler-holder {
-	user-select: none;
-	position: absolute;
+  position: absolute;
+  /* Remove or set a low z-index */
+  z-index: 1; /* or just omit z-index */
 }
 
-.handler-resource {
-	/* opacity: 0.8; */
-	/* filter: grayscale(); */
+.handler-holder img {
+		filter: hue-rotate(160deg);
 }
 
 .handler-resource:hover {
 	transition: var(--transition);
 	scale: 1.15;
-	filter: drop-shadow(0 0 20px var(--blue));
+	filter: drop-shadow(0 0 20px #38aff3) hue-rotate(160deg);
 }

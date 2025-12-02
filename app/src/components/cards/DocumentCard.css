@@ -4,10 +4,10 @@
 	flex-direction: column;
 	border-radius: var(--default-radius);
 	font-family: var(--usual-font);
+	font-size: var(--usual-size);
 	width: 60vw;
 	height: 90vh;
 	margin: 0 auto;
-	/* background-color: var(--gray);	 */
 }
 
 .img-holder {
@@ -16,17 +16,19 @@
 	border-radius: inherit;
 	justify-content: center;
 	align-items: center;
-	/* background-color: aqua; */
-	height: 90%;
+	height: 85%;
 }
 
-img {
+.img-holder img {
 	border-radius: inherit;
 	width: auto;
-	height: 90%;      
+	height: 90%;
+	border: 20px solid var(--transparent);
 }
 
 .text-holder {
 	text-align: center;
-	/* background-color: aquamarine; */
+	border-radius: inherit;
+	padding: 10px 20px;
+	background-color: var(--white);
 }

@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
+	--transparent: rgba(255, 255, 255, 0.3);
 	--black: #000000;
 	--gray: #c4c4c4;
 	--white: #ffffff;
 	--blue-light: #e6f7ff;
 	--blue: #0077b3;
 	--blue-dark: #005b99;
+	--red: #cf2727;
 
 	--usual-font: 'PT Serif', Arial;
-	--fancy-font: 'Playfair Display', Arial;
+	--fancy-font: 'Noto Serif Display', Arial;
+	/* --fancy-font: 'Playfair Display', Arial; */
 	
 	--usual-size: 1.1rem;
 	--title-size: 4.5rem;
@@ -22,6 +26,7 @@
 	--default-radius: 12px;
 
 	--transition: all 0.2s ease;
+	--slow-transition: all 0.8s ease;
 	--fade-up-animation: fadeInUp 0.6s ease forwards;
 	--fade-animation: fade 0.3s ease forwards;
 }

@@ -6,4 +6,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   updateRow: (tableName, row) => ipcRenderer.invoke('update-row', tableName, row),
   deleteRow: (tableName, id) => ipcRenderer.invoke('delete-row', tableName, id),
 	getHistoryDocumentImages: (prefix) => ipcRenderer.invoke('get-history-document-images', prefix),
+	getResources: () => ipcRenderer.invoke('get-resources'),
 });

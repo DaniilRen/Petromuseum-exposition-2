@@ -26,7 +26,7 @@ const FortressMap: React.FC = () => {
 			<HandPointer message='Нажмите на выделенную часть'/>
 			<div className="map" id='fortress-map'>
 				{resources.map((resource) => (
-					<Handler groupName={resource.name} resource={`${process.env.PUBLIC_URL}/images/maps/resources/${resource.path}`} left={resource.x} top={resource.y} zIndex={resource.zIndex}/>
+					<Handler groupName={resource.name} resource={resource} />
 				))}
 			</div>
 		</div>

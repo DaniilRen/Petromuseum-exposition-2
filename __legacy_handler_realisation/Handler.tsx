@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import FortressBuildingCard from '../../cards/FortressBuildingCard';
-import './Handler.css';
+import TransparentImage from './TransparentImage';
 import toggleElementVisibility from '../../../utils';
 
 
-interface HandlerProps {
-	groupName: string;
-	resource: string;
-	left: number;
-	top: number;
-	zIndex: number;
+export interface Resource {
+	name: string,
+	path: string,
+	x: number,
+	y: number,
 }
 
-const Handler: React.FC<HandlerProps> = ({ groupName, resource, left, top, zIndex }) => {
+interface HandlerProps {
+	groupName: string,
+	resource: Resource
+}
+
+const Handler: React.FC<HandlerProps> = ({ groupName, resource }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
@@ -28,15 +32,9 @@ const Handler: React.FC<HandlerProps> = ({ groupName, resource, left, top, zInde
   };
 
   return (
-    <div className="handler-holder" style={{ top: top, left: left, zIndex: zIndex }}>
-			{isVisible && <FortressBuildingCard group={groupName} onClose={handleClose} />}
-      <img
-        onClick={handleClick}
-        className="handler-resource"
-        src={resource}
-        alt={resource}
-        style={{ top: top, left: left }}
-      />
+    <div>
+			<TransparentImage resource={resource} handleClick={handleClick} />
+      {isVisible && <FortressBuildingCard group={groupName} onClose={handleClose} />}
     </div>
   );
 };

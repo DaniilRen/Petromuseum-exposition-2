@@ -1,0 +1,21 @@
+.resource {
+	filter: hue-rotate(160deg);
+}
+
+.canvas {
+	transition: var(--slow-transition);
+	border: 1px solid black;
+	filter: hue-rotate(160deg);
+}
+
+.hovered-canvas {
+	scale: 1.15;
+	filter: hue-rotate(160deg) drop-shadow(0 0 20px var(--red));
+}
+
+
+.resource:hover {
+	transition: var(--transition);
+	scale: 1.15;
+	filter: hue-rotate(160deg) drop-shadow(0 0 20px var(--red));
+}

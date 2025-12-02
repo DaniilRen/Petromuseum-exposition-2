@@ -6,6 +6,7 @@ declare global {
 			updateRow: (tableName: string, row: any) => Promise<void>;
 			deleteRow: (tableName: string, id: string) => Promise<void>;
 			getHistoryDocumentImages: (prefix: string) => Promise<string[]>;
+			getResources: () => Promise<any[]>;
 		};
 	}
 }

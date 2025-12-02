@@ -6,7 +6,7 @@
 	width: 70vw;
 	height: 80vh;
 	margin: 0 auto;
-	/* background-color: #ececec; */
+	background-color: var(--transparent);
 }
 
 .decembrists-holder {
@@ -16,7 +16,6 @@
 	font-family: var(--usual-font);
 	scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  /* height: 100vh; */
 	border-radius: inherit;
 }
 

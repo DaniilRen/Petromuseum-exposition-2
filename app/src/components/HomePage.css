@@ -25,17 +25,42 @@
 	background-position: -6px 0;
 }
 
-.title {
-	font-family: var(--fancy-font);
-  font-size: var(--title-size);
-  color: var(--white);
-	text-shadow:
-    -2px -2px 0 #000,
-    2px -2px 0 #000,
-    -2px 2px 0 #000,
-    2px 2px 0 #000;
-  user-select: none;
-  margin: 0;
+
+.poster {
+	margin: 0 auto;
+  position: relative;
+  width: 960px;
+  padding: 40px;
+  /* background: #90a8b7; */
+}
+
+.poster .line {
+  font-family: var(--fancy-font); 
+  letter-spacing: 0.08em;
+  color: #111;
+  text-transform: uppercase;
+  line-height: 0.8; 
+}
+
+.poster .line-1 {
+  font-size: 48px;
+  position: relative;
+	margin-bottom: 35px;  
+}
+
+.poster .line-2 {
+  font-size: 96px;
+  position: relative;
+  margin-top: -35px;  
+	font-weight: 700;
+}
+
+.poster .line-3 {
+  font-size: 96px;
+  position: relative;
+  margin-top: -10px;  
+	left: 120px;
+	font-weight: 700;
 }
 
 .buttonsGrid {
