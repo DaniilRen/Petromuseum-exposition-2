@@ -11,9 +11,9 @@ interface DecembristTextCardProps {
 const DecembristTextCard: React.FC<DecembristTextCardProps> = ({ info, address, topography }) => {
 	return (
 		<div key={info} className="decembrist-text">
-			<p className="info">{info}</p>
-			<p className="address">{address}</p>
-			<p className="topography">{topography}</p>
+			<p className="info"><span>Декабрист</span>: {info}</p>
+			<p className="address"><span>Адреса проживания в Санкт-Петербурге</span>: {address}</p>
+			<p className="topography"><span>Пребывание в крепости</span>: {topography}</p>
 		</div>
 	);
 };

@@ -13,7 +13,7 @@
 .address,
 .topography {
 	font-size: var(--usual-size);
-	font-family: var(--fancy-font);
+	/* font-family: var(--fancy-font); */
 }
 
 .info {
