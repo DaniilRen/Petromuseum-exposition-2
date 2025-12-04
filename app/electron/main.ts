@@ -1,30 +1,49 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { db } from '../src/db.ts';
+import { db } from '../src/db.js';
 import { fileURLToPath } from 'url';
 import { readdir } from 'fs/promises';
 
 function createWindow() {
-
 	const __filename = fileURLToPath(import.meta.url);
 	const __dirname = path.dirname(__filename);
 
+	// Get the correct paths for both dev and production
+	const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+	
+	// Preload script path
+	let preloadPath: string;
+	if (isDev) {
+		// In development, preload.js is in the source electron directory
+		// __dirname is dist/electron, so go up to app root, then to electron/preload.js
+		preloadPath = path.join(__dirname, '..', 'electron', 'preload.js');
+	} else {
+		// In production, it's in the same directory as main.js in the asar
+		preloadPath = path.join(__dirname, 'preload.js');
+	}
 
 	const win = new BrowserWindow({
 		width: 1280,
 		height: 1024,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js'), // preload script for contextBridge API
+			preload: preloadPath,
 			contextIsolation: true,
 			nodeIntegration: false,
 		},
 	});
 
-	win.loadURL('http://localhost:3000'); 
-	// win.loadURL(`file://${__dirname}/../build/index.html`);
-
-	// win.webContents.openDevTools();
+	if (isDev) {
+		win.loadURL('http://localhost:3000');
+		win.webContents.openDevTools();
+	} else {
+		// In production, build folder is at the root of the asar
+		const appPath = app.getAppPath();
+		const buildPath = path.join(appPath, 'build', 'index.html');
+		win.loadURL(`file://${buildPath}`);
+		// Temporarily enable dev tools to see errors
+		win.webContents.openDevTools();
 	}
+}
 
 app.whenReady().then(async () => {
   await db.loadDataIfEmpty(); // Load initial data if DB empty
@@ -60,9 +79,10 @@ ipcMain.handle('delete-row', async (_event, tableName: string, id: string) => {
 });
 
 ipcMain.handle('get-history-document-images', async (_event, prefix: string) => {
-	const __filename = fileURLToPath(import.meta.url);
-	const dirname = path.dirname(__filename)
-	const dirPath = path.join(dirname, '..', 'public', 'images', 'history_documents');
+	const appPath = app.getAppPath();
+	// Images are in extraResources, so use process.resourcesPath
+	const resourcesPath = process.resourcesPath || appPath;
+	const dirPath = path.join(resourcesPath, 'images', 'history_documents');
 	try {
 		const files = await readdir(dirPath);
 		return files.filter(file => file.startsWith(prefix+'_'));
@@ -98,9 +118,9 @@ const groupName_ImageName_Coordinates: Record<string, [string, number[], number]
 };
 
 ipcMain.handle('get-resources', async () => {
-	const __filename = fileURLToPath(import.meta.url);
-	const dirnameMain = path.dirname(__filename);
-	const dirPath = path.join(dirnameMain, '..', 'public', 'images', 'maps', 'resources');
+	// Images are in extraResources, so use process.resourcesPath
+	const resourcesPath = process.resourcesPath || app.getAppPath();
+	const dirPath = path.join(resourcesPath, 'images', 'maps', 'resources');
 
 	const resources: Array<{ name: string; path: string; x: number; y: number, zIndex: number }> = [];
 

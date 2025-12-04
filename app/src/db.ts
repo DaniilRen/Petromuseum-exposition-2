@@ -2,6 +2,7 @@ import path from 'path';
 import Datastore from 'nedb-promises';
 import * as fs from 'fs/promises';
 import { fileURLToPath } from 'url';
+import { app } from 'electron';
 
 
 // Interfaces for all tables:
@@ -57,7 +58,10 @@ export class AppDatabase {
 	constructor() {
 		const __filename = fileURLToPath(import.meta.url);
 		const __dirname = path.dirname(__filename);
-		const table_dir = path.join(__dirname, '..', 'storage')
+		// In packaged app, use app.getPath('userData') for storage
+		const table_dir = (app && app.isPackaged)
+			? path.join(app.getPath('userData'), 'storage')
+			: path.join(__dirname, '..', 'storage');
 
 		this.Decembrists_sec_1 = Datastore.create({
 			filename: path.join(table_dir, 'Decembrists_sec_1.db'),
@@ -153,9 +157,19 @@ export class AppDatabase {
 	async loadDataIfEmpty() {
 		const __filename = fileURLToPath(import.meta.url);
 		const __dirname = path.dirname(__filename);
+		
+		// Get the correct path for tables.json
+		let jsonPath: string;
+		if (app && app.isPackaged) {
+			// In packaged app, it's in the asar at the root
+			jsonPath = path.join(app.getAppPath(), 'public', 'data', 'tables.json');
+		} else {
+			// In development, it's in the source public directory
+			// __dirname is dist/src, so go up to app root, then to public/data
+			jsonPath = path.join(__dirname, '..', '..', 'public', 'data', 'tables.json');
+		}
 
 		if (await this.isEmpty(this.Decembrists_sec_1)) {
-			const jsonPath = path.join(__dirname, '..', 'public', 'data', 'tables.json');
 			await this.importDataFromJson(jsonPath);
 			console.log('Imported JSON data into empty DB.');
 		}

@@ -21,7 +21,8 @@
     "typescript": "^5.9.3",
     "web-vitals": "^2.1.4"
   },
-  "main": "electron/main.ts",
+  "main": "dist/electron/main.js",
+  "type": "module",
   "homepage": "./",
   "scripts": {
     "clean": "rimraf dist",
@@ -29,7 +30,8 @@
 		"electron-start": "electron .",
 		"start": "concurrently \"react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
     "react-build": "react-scripts build",
-    "electron-build": "tsc -p electron && electron-builder",
+    "electron-build": "tsc -p electron && npm run copy-preload && electron-builder",
+    "copy-preload": "node -e \"const fs=require('fs');const path=require('path');fs.mkdirSync('dist/electron',{recursive:true});fs.copyFileSync('electron/preload.js','dist/electron/preload.js');\"",
     "build": "npm run clean && npm run react-build && npm run electron-build"
   },
   "build": {
@@ -40,10 +42,11 @@
     },
     "extends": null,
     "files": [
-      "electron/main.ts",
+      "dist/electron/**/*",
+      "dist/src/**/*",
+      "electron/preload.js",
       "build/**/*",
-      "electron/**/*",
-      "src/**/*",
+      "public/data/**/*",
       "storage/**/*",
       "node_modules/**/*",
       "package.json"
