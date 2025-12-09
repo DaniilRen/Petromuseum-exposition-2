@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ArrowBack from '../buttons/ArrowBack';
-import Handler from './resources/Handler';
+import FortressHandler from './resources/FortressHandler';
 import './Map.css'
 import './FortressMap.css'
 import HandPointer from '../pointers/HandPointer';
@@ -11,8 +11,7 @@ const FortressMap: React.FC = () => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const resources = await window.electronAPI.getResources(); 
-				console.log(resources)
+				const resources = await window.electronAPI.getResources("fortress"); 
 				setResources(resources);
 			} catch (err) {
 				console.error('Error fetching data:', err);
@@ -26,7 +25,7 @@ const FortressMap: React.FC = () => {
 			<HandPointer message='Нажмите на выделенную часть'/>
 			<div className="map" id='fortress-map'>
 				{resources.map((resource) => (
-					<Handler groupName={resource.name} resource={`${process.env.PUBLIC_URL}/images/maps/resources/${resource.path}`} left={resource.x} top={resource.y} zIndex={resource.zIndex}/>
+					<FortressHandler groupName={resource.name} resource={`${process.env.PUBLIC_URL}/images/maps/resources/${resource.path}`} left={resource.x} top={resource.y} zIndex={resource.zIndex}/>
 				))}
 			</div>
 		</div>

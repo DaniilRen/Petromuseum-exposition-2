@@ -18,13 +18,13 @@ const App: React.FC = () => {
 				<Route
 					path="/page/2"
 					element={
-						<ContentWrapper tableName="Addresses_sec_2" content_type="city-map" />
+						<ContentWrapper tableName="Addresses_sec_2" content_type="addresses" />
 					}
 				/>
 				<Route
 					path="/page/3"
 					element={
-						<ContentWrapper tableName="Commemorative_plaques_sec_3" content_type="city-map" />
+						<ContentWrapper tableName="Commemorative_plaques_sec_3" content_type="plaques" />
 					}
 				/>
 				<Route

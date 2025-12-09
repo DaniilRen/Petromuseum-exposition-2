@@ -25,7 +25,6 @@ const ContentWrapper: React.FC<WrapperProps> = ({ tableName, content_type }) => 
 				const data = await window.electronAPI.getRows(tableName);
 				if (tableName === "Quotes_sec_6" || tableName === "Decembrists_sec_4") {
 					const unique_groups = [...new Set( data.map(row => row['group']) )];
-					// console.log(unique_groups)
 					setRows(unique_groups);
 				}
 				else {
@@ -41,8 +40,9 @@ const ContentWrapper: React.FC<WrapperProps> = ({ tableName, content_type }) => 
 		case "fortress-map":
 			return <FortressMap />
 
-		case "city-map":
-			return <CityMap />
+		case "plaques":
+		case "addresses":
+			return <CityMap mapType={content_type} />
 
 		case "decembrists":
 			return (

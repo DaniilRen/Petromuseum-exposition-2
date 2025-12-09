@@ -15,9 +15,8 @@ interface Decembrist1 {
 
 interface Address {
   id?: string;
-  group: string;
-  address: string;
-  info: string;
+	address: string;
+  name: string;
 }
 
 interface Plaque {
@@ -125,7 +124,7 @@ export class AppDatabase {
 						doc = { group: row[0], name: row[1], info: row[2] };
 						break;
 					case 'Addresses_sec_2':
-						doc = { group: row[0], address: row[1], info: row[2] };
+						doc = { address: row[0], name: row[1] };
 						break;
 					case 'Commemorative_plaques_sec_3':
 						doc = { image_name: row[0], info: row[1] };

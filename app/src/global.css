@@ -10,10 +10,10 @@
 	--blue: #0077b3;
 	--blue-dark: #005b99;
 	--red: #cf2727;
+	--dimmed-red: #801b1b;
 
 	--usual-font: 'PT Serif', Arial;
 	--fancy-font: 'Noto Serif Display', Arial;
-	/* --fancy-font: 'Playfair Display', Arial; */
 	
 	--usual-size: 1.1rem;
 	--title-size: 4.5rem;
@@ -33,6 +33,7 @@
 
 html {
 	scroll-behavior: smooth;
+		overflow: hidden;
 }
 
 .hline {

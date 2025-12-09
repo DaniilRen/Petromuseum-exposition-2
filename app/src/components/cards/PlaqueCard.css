@@ -1,0 +1,33 @@
+.plaque-card {
+	user-select: none;
+	padding-top: 50px;
+	overflow-y: auto;
+	width: 68vw;
+	height: 78vh;
+	background-color: var(--white);
+	border-radius: var(--default-radius);
+	animation: var(--fade-up-animation);
+}
+
+.plaque-img-holder {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	height: 80%;
+}
+
+.plaque-img-holder img {
+	border-radius: 30px;
+	width: auto;
+	height: 90%;
+	border: 20px solid var(--transparent);
+}
+
+
+.plaque-text-holder {
+	text-align: center;
+	padding: 10px 20px;
+	font-size: var(--quote-author-size);
+}

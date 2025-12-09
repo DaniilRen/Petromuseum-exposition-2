@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import FortressBuildingCard from '../../cards/FortressBuildingCard';
-import './Handler.css';
+import './FortressHandler.css';
 import toggleElementVisibility from '../../../utils';
 
 
-interface HandlerProps {
+interface FortressHandlerProps {
 	groupName: string;
 	resource: string;
 	left: number;
@@ -12,7 +12,7 @@ interface HandlerProps {
 	zIndex: number;
 }
 
-const Handler: React.FC<HandlerProps> = ({ groupName, resource, left, top, zIndex }) => {
+const FortressHandler: React.FC<FortressHandlerProps> = ({ groupName, resource, left, top, zIndex }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
@@ -41,4 +41,4 @@ const Handler: React.FC<HandlerProps> = ({ groupName, resource, left, top, zInde
   );
 };
 
-export default Handler;
+export default FortressHandler;

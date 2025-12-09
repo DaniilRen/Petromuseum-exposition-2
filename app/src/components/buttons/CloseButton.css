@@ -16,11 +16,11 @@
 
 .close-button:focus,
 .close-button:hover {
-	background-color: var(--gray);
+	background-color: var(--red);
 	scale: 0.9;
 	border: 2px solid var(--black);
 }
 
 .close-button:focus {
-	background-color: #8f8f8f
+	background-color: var(--dimmed-red)
 }

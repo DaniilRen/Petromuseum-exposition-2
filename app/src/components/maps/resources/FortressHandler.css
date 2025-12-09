@@ -1,7 +1,6 @@
 .handler-holder {
   position: absolute;
-  /* Remove or set a low z-index */
-  z-index: 1; /* or just omit z-index */
+  z-index: 1;
 }
 
 .handler-holder img {
