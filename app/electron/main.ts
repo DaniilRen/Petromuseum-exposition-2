@@ -17,9 +17,9 @@ function createWindow() {
 	}
 
 	const win = new BrowserWindow({
-		// fullscreen: true,
-		width: 1280,
-		height: 1024,
+		fullscreen: true,
+		// width: 1280,
+		// height: 1024,
 		webPreferences: {
 			preload: preloadPath,
 			contextIsolation: true,
@@ -86,18 +86,18 @@ const coordinatesFortress: Record<string, [string, number[], number]> = {
   Nikolskaya_kurtina: ['Никольская куртина', [370, 327], 1],
   Ekaterininskaya_kurtina: ['Екатерининская куртина', [498, 660], 1],
   Nevskaya_kurtina: ['Невская куртина', [748, 480], 1],
-  Petrovskaya_kurtina: ['Петровская куртина', [894, 278], 1],
+  Petrovskaya_kurtina: ['Петровская куртина', [899, 278], 1],
   Vasilievskaya_kurtina: ['Васильевская куртина', [389, 518], 1],
 
   Golovkin_bastion: ['Головкин бастион', [531, 195], 1],
-  Gosudarev_bastion: ['Государев бастион', [906, 417], 1],
-  Menshikov_bastion: ['Меншиков бастион', [837, 185], 1],
+  Gosudarev_bastion: ['Государев бастион', [907, 417], 1],
+  Menshikov_bastion: ['Меншиков бастион', [839, 186], 1],
   Narishkin_bastion: ['Нарышкин бастион', [663, 620], 1],
   Trubeckoy_bastion: ['Трубецкой бастион', [395, 636], 1],
   Zotov_bastion: ['Зотов бастион', [292, 406], 1],
 
   Nevskie_gates: ['Невские ворота', [790, 574], 2],
-  Petrovskie_gates: ['Петровские ворота', [919, 361], 2],
+  Petrovskie_gates: ['Петровские ворота', [925, 360], 2],
 
   Gauptvahta: ['Гауптвахта', [787, 513], 2],
   Komendant_house: ['Комендантский дом', [635, 509], 1],
@@ -170,6 +170,9 @@ const coordinatesAddresses: Record<string, [string, number[], number]> = {
 
 ipcMain.handle('get-resources', async (_event, mapType: string) => {
 	const resources: Array<{ name: string; path: string; x: number; y: number, zIndex: number }> = [];
+	// use to correct x-y coordinates
+	const topOffset = 30;
+	const leftOffset = 8; 
 
 	async function getFortressResources(resources: Array<any>, dir: string) {
 		const entries = await readdir(dir, { withFileTypes: true });
@@ -192,8 +195,8 @@ ipcMain.handle('get-resources', async (_event, mapType: string) => {
 				resources.push({
 					name: displayName,
 					path: relativePath,
-					x: coordinates[0],
-					y: coordinates[1],
+					x: coordinates[0] + leftOffset,
+					y: coordinates[1] + topOffset,
 					zIndex: zIndex
 				});
 			}
@@ -223,8 +226,8 @@ ipcMain.handle('get-resources', async (_event, mapType: string) => {
 						resources.push({
 							name: displayName,
 							path: relativePath,
-							x: coordinates[0],
-							y: coordinates[1],
+							x: coordinates[0] + leftOffset,
+							y: coordinates[1] + topOffset,
 							zIndex: zIndex
 						});
 					}
@@ -242,8 +245,8 @@ ipcMain.handle('get-resources', async (_event, mapType: string) => {
 					resources.push({
 						name: displayName,
 						path: '', // no image for addresses table
-						x: coordinates[0],
-						y: coordinates[1],
+						x: coordinates[0] + leftOffset,
+						y: coordinates[1] + topOffset,
 						zIndex: zIndex
 					});
 				}
