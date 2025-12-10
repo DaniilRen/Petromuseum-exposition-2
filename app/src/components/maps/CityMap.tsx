@@ -3,7 +3,7 @@ import ArrowBack from '../buttons/ArrowBack';
 import HandPointer from '../pointers/HandPointer';
 import './Map.css'
 import './CityMap.css'
-import CityHandler from './resources/CityHandler';
+import CityHandler from './handlers/CityHandler';
 
 interface CityMapProps {
 	mapType: string;

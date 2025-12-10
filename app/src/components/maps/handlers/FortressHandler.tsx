@@ -27,8 +27,13 @@ const FortressHandler: React.FC<FortressHandlerProps> = ({ groupName, resource, 
     setIsVisible(false);
   };
 
+  let handlerClassname = "handler-holder"
+  if (groupName.includes("ворота")) {
+    handlerClassname += " gates"
+  }
+
   return (
-    <div className="handler-holder" style={{ top: top, left: left, zIndex: zIndex }}>
+    <div className={handlerClassname} style={{ top: top, left: left, zIndex: zIndex }}>
 			{isVisible && <FortressBuildingCard group={groupName} onClose={handleClose} />}
       <img
         onClick={handleClick}

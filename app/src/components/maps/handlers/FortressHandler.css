@@ -12,3 +12,13 @@
 	scale: 1.15;
 	filter: drop-shadow(0 0 20px #38aff3) hue-rotate(160deg);
 }
+
+.gates img{
+	filter:  hue-rotate(160deg) saturate(2.7);
+}
+
+.gates:hover {
+	transition: var(--transition);
+	scale: 1.15;
+	filter: drop-shadow(0 0 20px var(--red))  saturate(2.7);
+}

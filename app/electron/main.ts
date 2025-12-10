@@ -29,7 +29,6 @@ function createWindow() {
 
 	if (isDev) {
 		win.loadURL('http://localhost:3000');
-		// win.webContents.openDevTools();
 	} else {
 		const appPath = app.getAppPath();
 		const buildPath = path.join(appPath, 'build', 'index.html');
@@ -97,8 +96,8 @@ const coordinatesFortress: Record<string, [string, number[], number]> = {
   Trubeckoy_bastion: ['Трубецкой бастион', [395, 636], 1],
   Zotov_bastion: ['Зотов бастион', [292, 406], 1],
 
-  Nevskie_gates: ['Невские ворота', [-1000, -1000], 1],
-  Petrovskie_gates: ['Петровские ворота', [-1000, -1000], 1],
+  Nevskie_gates: ['Невские ворота', [790, 574], 2],
+  Petrovskie_gates: ['Петровские ворота', [919, 361], 2],
 
   Gauptvahta: ['Гауптвахта', [787, 513], 2],
   Komendant_house: ['Комендантский дом', [635, 509], 1],

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ArrowBack from '../buttons/ArrowBack';
-import FortressHandler from './resources/FortressHandler';
+import FortressHandler from './handlers/FortressHandler';
 import './Map.css'
 import './FortressMap.css'
 import HandPointer from '../pointers/HandPointer';
