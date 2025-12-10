@@ -21,7 +21,7 @@
     "typescript": "^5.9.3",
     "web-vitals": "^2.1.4"
   },
-  "main": "dist/electron/main.js",
+  "main": "electron/main.ts",
   "type": "module",
   "homepage": "./",
   "scripts": {
