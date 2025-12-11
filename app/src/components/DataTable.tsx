@@ -34,7 +34,7 @@ const DataTable: React.FC<DataTableProps> = ({
     const handleDelete = async (rowIndex: number) => {
         if (!activeTab || !originalData[rowIndex] || !onDeleteRow) return;
         
-        if (!confirm(`Delete "${originalData[rowIndex].group || originalData[rowIndex].image_name || originalData[rowIndex].text || 'this row'}"?`)) {
+        if (!confirm(`Удалить "${originalData[rowIndex].group || originalData[rowIndex].image_name || originalData[rowIndex].text || 'this row'}"?`)) {
             return;
         }
 
@@ -55,7 +55,7 @@ const DataTable: React.FC<DataTableProps> = ({
     if (loading) {
         return (
             <div className="table loading">
-                <div className="loading-spinner">Loading...</div>
+                <div className="loading-spinner">Загрузка...</div>
             </div>
         );
     }
@@ -66,7 +66,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 <div className="empty-message">
                     {emptyMessage}
                     <button className="add-new-btn" onClick={handleAddNew}>
-                        ➕ Add First Row
+                        ➕ Добавить первую запись
                     </button>
                 </div>
             </div>
@@ -77,7 +77,7 @@ const DataTable: React.FC<DataTableProps> = ({
         <div className="table">
             <div className="table-header-row">
                 <button className="add-new-btn" onClick={handleAddNew}>
-                    ➕ Add New Row
+                    ➕ Добавить запись
                 </button>
             </div>
             <table>
@@ -100,7 +100,7 @@ const DataTable: React.FC<DataTableProps> = ({
                                     <button 
                                         className="edit-btn"
                                         onClick={() => handleEdit(rowIndex)}
-                                        title="Edit row"
+                                        title="Редактировать"
                                     >
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -110,7 +110,7 @@ const DataTable: React.FC<DataTableProps> = ({
                                     <button 
                                         className="delete-btn"
                                         onClick={() => handleDelete(rowIndex)}
-                                        title="Delete row"
+                                        title="Удалить"
                                     >
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <polyline points="3 6 5 6 21 6"></polyline>
