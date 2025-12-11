@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { db } from '../src/db.js';
+import { AppDatabase } from '../src/db.js';
 import { fileURLToPath } from 'url';
 import { readdir } from 'fs/promises';
 
@@ -37,8 +37,31 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
-  await db.loadDataIfEmpty(); 
-  createWindow();
+	const db = new AppDatabase()
+	await db.loadDataIfEmpty(); 
+
+	// IPC handlers for renderer process to invoke DB operations
+	ipcMain.handle('get-rows', async (_event, tableName: string) => {
+	// @ts-ignore
+	return db![tableName].find({});
+	});
+
+	ipcMain.handle('add-row', async (_event, tableName: string, row: any) => {
+	// @ts-ignore
+	return db![tableName].insert(row);
+	});
+
+	ipcMain.handle('update-row', async (_event, tableName: string, row: any) => {
+	if (!row.id) throw new Error('id is required for update');
+	// @ts-ignore
+	return db!.updateRow(db[tableName], row);
+	});
+
+	ipcMain.handle('delete-row', async (_event, tableName: string, id: string) => {
+	// @ts-ignore
+	return db!.deleteRow(db[tableName], id);
+	});
+	createWindow();
 });
 
 app.on('window-all-closed', () => {
@@ -47,27 +70,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-// IPC handlers for renderer process to invoke DB operations
-ipcMain.handle('get-rows', async (_event, tableName: string) => {
-  // @ts-ignore
-  return db[tableName].find({});
-});
-
-ipcMain.handle('add-row', async (_event, tableName: string, row: any) => {
-  // @ts-ignore
-  return db[tableName].insert(row);
-});
-
-ipcMain.handle('update-row', async (_event, tableName: string, row: any) => {
-  if (!row.id) throw new Error('id is required for update');
-  // @ts-ignore
-  return db.updateRow(db[tableName], row);
-});
-
-ipcMain.handle('delete-row', async (_event, tableName: string, id: string) => {
-  // @ts-ignore
-  return db.deleteRow(db[tableName], id);
-});
 
 ipcMain.handle('get-history-document-images', async (_event, prefix: string) => {
 	try {

@@ -55,12 +55,17 @@ export class AppDatabase {
 	Quotes_sec_6: Datastore<Quote6>;
 
 	constructor() {
-		const __filename = fileURLToPath(import.meta.url);
-		const __dirname = path.dirname(__filename);
+		// const __filename = fileURLToPath(import.meta.url);
+		// const __dirname = path.dirname(__filename);
 		// In packaged app, use app.getPath('userData') for storage
-		const table_dir = (app && app.isPackaged)
-			? path.join(app.getPath('userData'), 'storage')
-			: path.join(__dirname, '..', 'storage');
+		// const table_dir = (app && app.isPackaged)
+		// 	? path.join(app.getPath('userData'), 'storage')
+		// 	: path.join(__dirname, '..', 'storage');
+
+		const table_dir = app.getPath('userData');
+		fs.mkdir(table_dir, { recursive: true }).catch(err => {
+			console.error('Failed to create storage dir:', err);
+		});
 
 		this.Decembrists_sec_1 = Datastore.create({
 			filename: path.join(table_dir, 'Decembrists_sec_1.db'),
@@ -99,11 +104,9 @@ export class AppDatabase {
 	}
 
 	async importDataFromJson(jsonPath: string) {
-		// Read and parse JSON file as text
 		const jsonString = await fs.readFile(jsonPath, 'utf8');
 		const jsonData: Record<string, any[][]> = JSON.parse(jsonString);
 
-		// jsonData is an object: keys are table names; values are arrays of row arrays
 		for (const [tableName, rows] of Object.entries(jsonData)) {
 			if (!Array.isArray(rows)) {
 				console.warn(`Expected an array of rows for table ${tableName} but got:`, rows);
@@ -144,7 +147,7 @@ export class AppDatabase {
 						doc = { group: row[0], text: row[1], author: row[2] };
 						break;
 					default:
-						doc = row; // fallback
+						doc = row;
 				}
 				
 				await collection.insert(doc);
@@ -160,17 +163,13 @@ export class AppDatabase {
 		// Get the correct path for tables.json
 		let jsonPath: string;
 		if (app && app.isPackaged) {
-			// In packaged app, it's in the asar at the root
 			jsonPath = path.join(app.getAppPath(), 'public', 'data', 'tables.json');
 		} else {
-			// In development, it's in the source public directory
-			// __dirname is dist/src, so go up to app root, then to public/data
 			jsonPath = path.join(__dirname, '..', '..', 'public', 'data', 'tables.json');
 		}
 
 		if (await this.isEmpty(this.Decembrists_sec_1)) {
 			await this.importDataFromJson(jsonPath);
-			console.log('Imported JSON data into empty DB.');
 		}
 	}
 
@@ -193,4 +192,4 @@ export class AppDatabase {
 	}
 }
 
-export const db = new AppDatabase()
+

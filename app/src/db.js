@@ -4,8 +4,8 @@ import * as fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 export class AppDatabase {
     constructor() {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
+        // const __filename = fileURLToPath(import.meta.url);
+        // const __dirname = path.dirname(__filename);
         const table_dir = path.join(__dirname, '..', 'storage');
         this.Decembrists_sec_1 = Datastore.create({
             filename: path.join(table_dir, 'Decembrists_sec_1.db'),
