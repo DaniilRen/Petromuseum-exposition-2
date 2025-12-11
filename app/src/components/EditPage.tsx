@@ -19,7 +19,7 @@ const EditPage: React.FC = () => {
     const state = location.state as { fullRow?: any; tableName?: TableType };
     
     if (state?.fullRow && tableName) {
-      console.log('EditPage received data:', state.fullRow); // Debug
+      console.log('EditPage received data:', state.fullRow); 
       const rowData = { ...state.fullRow };
       setFormData(rowData);
       setOriginalData(rowData);
@@ -49,7 +49,7 @@ const EditPage: React.FC = () => {
             _id: formData._id || formData.id  // NeDB format
         };
 
-        console.log('Sending for update:', rowToUpdate); // Debug
+        console.log('Sending for update:', rowToUpdate); 
 
         try {
             setLoading(true);
@@ -83,7 +83,7 @@ const EditPage: React.FC = () => {
     <div className="edit-container">
       <div className="edit-header">
         <ArrowBack />
-        <h1>Edit {tableName}</h1>
+        <h1>Редактирование таблицы {tableName}</h1>
       </div>
 
       <div className="edit-content">

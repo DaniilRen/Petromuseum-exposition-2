@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import ArrowBack from './buttons/ArrowBack';
 import './AddPage.css';
 
 
 const AddPage: React.FC = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const { tableName } = useParams<{ tableName: string }>();
     
     const [formData, setFormData] = useState<Record<string, string>>({});
@@ -28,7 +27,6 @@ const AddPage: React.FC = () => {
             setLoading(true);
             await window.electronAPI.addRow(tableName, formData);
             setMessage('Row added successfully!');
-            // Reset form after 1.5s and go back
             setTimeout(() => {
                 navigate(-1);
             }, 1500);
@@ -62,7 +60,7 @@ const AddPage: React.FC = () => {
         <div className="add-container">
             <div className="add-header">
                 <ArrowBack />
-                <h1>Add New {tableName?.replace('_sec_', ' ')}</h1>
+                <h1>Добавить запись в таблицу {tableName?.replace('_sec_', ' ')}</h1>
             </div>
 
             <div className="add-content">
@@ -87,7 +85,7 @@ const AddPage: React.FC = () => {
                         onClick={handleSubmit}
                         disabled={loading || !hasRequiredFields}
                     >
-                        {loading ? 'Adding...' : 'Add Row'}
+                        {loading ? 'Добавление...' : 'Добавить запись'}
                     </button>
                     {message && (
                         <div className={`message ${message.includes('success') ? 'success' : 'error'}`}>
