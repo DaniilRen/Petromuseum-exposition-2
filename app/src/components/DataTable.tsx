@@ -95,9 +95,20 @@ const DataTable: React.FC<DataTableProps> = ({
                     <tbody>
                         {data.map((row, rowIndex) => (
                             <tr key={rowIndex}>
-                                {row.map((cell, cellIndex) => (
-                                    <td key={cellIndex}>{cell || '-'}</td>
-                                ))}
+                           {row.map((cell, cellIndex) => {
+                                const isImageNameLocked = activeTab === 'Documents_sec_5' && headers[0] === 'Image Name';
+                                return (
+                                    <td 
+                                        key={cellIndex} 
+                                        className={isImageNameLocked && cellIndex === 0 ? 'locked-cell' : ''}
+                                    >
+                                        {cell || '-'}
+                                        {isImageNameLocked && cellIndex === 0 && (
+                                            <span className="lock-icon" title="Image name cannot be changed">🔒</span>
+                                        )}
+                                    </td>
+                                );
+                            })}
                                 <td className="actions-cell">
                                     <div className="action-buttons">
                                         <button 

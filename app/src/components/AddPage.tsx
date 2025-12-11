@@ -44,13 +44,14 @@ const AddPage: React.FC = () => {
         { key: 'address', label: 'Address *', required: true },
         { key: 'topography', label: 'Topography *', required: true }
     ] : tableName === 'Documents_sec_5' ? [
-        { key: 'image_name', label: 'Image Name *', required: true },
+        { key: 'image_name', label: 'Image Name *', required: true, readonly: false }, // Can set on add
         { key: 'info', label: 'Info *', required: true }
     ] : [
         { key: 'group', label: 'Group *', required: true },
         { key: 'text', label: 'Text *', required: true },
         { key: 'author', label: 'Author *', required: true }
     ];
+
 
     const hasRequiredFields = fieldConfig.every(field => 
         !field.required || (formData[field.key]?.trim() && formData[field.key]?.trim().length > 0)
@@ -65,18 +66,23 @@ const AddPage: React.FC = () => {
 
             <div className="add-content">
                 <div className="add-form">
-                    {fieldConfig.map((field) => (
-                        <div key={field.key} className="form-group">
-                            <label>{field.label}</label>
-                            <input
-                                type="text"
-                                value={formData[field.key] || ''}
-                                onChange={(e) => handleInputChange(field.key, e.target.value)}
-                                className={`form-input ${!formData[field.key]?.trim() && field.required ? 'error' : ''}`}
-                                placeholder={field.required ? 'Required' : 'Optional'}
-                            />
-                        </div>
-                    ))}
+                    {fieldConfig.map((field) => {
+                        const isReadOnly = tableName === 'Documents_sec_5' && field.key === 'image_name' && field.readonly;
+                        
+                        return (
+                            <div key={field.key} className="form-group">
+                                <label>{field.label}</label>
+                                <input
+                                    type="text"
+                                    value={formData[field.key] || ''}
+                                    onChange={(e) => !isReadOnly && handleInputChange(field.key, e.target.value)}
+                                    className={`form-input ${!formData[field.key]?.trim() && field.required ? 'error' : ''} ${isReadOnly ? 'readonly' : ''}`}
+                                    placeholder={isReadOnly ? 'Image name cannot be changed' : field.required ? 'Required' : 'Optional'}
+                                    readOnly={isReadOnly}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
 
                 <div className="add-actions">

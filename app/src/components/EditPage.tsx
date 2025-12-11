@@ -88,18 +88,25 @@ const EditPage: React.FC = () => {
 
       <div className="edit-content">
         <div className="edit-form">
-          {fieldConfig.map((field) => (
-            <div key={field.key} className="form-group">
-              <label>{field.label}:</label>
-              <input
-                type="text"
-                value={formData[field.key] || ''}
-                onChange={(e) => handleInputChange(field.key, e.target.value)}
-                className="form-input"
-              />
-            </div>
-          ))}
-        </div>
+          
+         {fieldConfig.map((field) => {
+            const isReadOnly = tableName === 'Documents_sec_5' && field.key === 'image_name';
+            
+            return (
+              <div key={field.key} className="form-group">
+                <label>{field.label}:</label>
+                <input
+                  type="text"
+                  value={formData[field.key] || ''}
+                  onChange={(e) => !isReadOnly && handleInputChange(field.key, e.target.value)}
+                  className={`form-input ${isReadOnly ? 'readonly' : ''}`}
+                  readOnly={isReadOnly}
+                  placeholder={isReadOnly ? 'Image name cannot be changed' : ''}
+                />
+              </div>
+            );
+        })}
+                </div>
 
         <div className="edit-actions">
           <button 

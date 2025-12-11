@@ -126,3 +126,16 @@
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+.form-input.readonly {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.form-input.readonly:focus {
+    border-color: #dee2e6;
+    box-shadow: none;
+    background: #f8f9fa;
+}

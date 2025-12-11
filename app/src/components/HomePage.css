@@ -333,3 +333,21 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
+
+.locked-cell {
+    position: relative;
+    background: #fff3cd;
+    font-style: italic;
+}
+
+.lock-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #856404;
+    background: rgba(255, 193, 7, 0.2);
+    border-radius: 4px;
+    padding: 2px 4px;
+}
