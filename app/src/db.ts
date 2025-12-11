@@ -55,13 +55,6 @@ export class AppDatabase {
 	Quotes_sec_6: Datastore<Quote6>;
 
 	constructor() {
-		// const __filename = fileURLToPath(import.meta.url);
-		// const __dirname = path.dirname(__filename);
-		// In packaged app, use app.getPath('userData') for storage
-		// const table_dir = (app && app.isPackaged)
-		// 	? path.join(app.getPath('userData'), 'storage')
-		// 	: path.join(__dirname, '..', 'storage');
-
 		const table_dir = app.getPath('userData');
 		fs.mkdir(table_dir, { recursive: true }).catch(err => {
 			console.error('Failed to create storage dir:', err);
@@ -157,16 +150,9 @@ export class AppDatabase {
 
 
 	async loadDataIfEmpty() {
-		const __filename = fileURLToPath(import.meta.url);
-		const __dirname = path.dirname(__filename);
-		
-		// Get the correct path for tables.json
-		let jsonPath: string;
-		if (app && app.isPackaged) {
-			jsonPath = path.join(app.getAppPath(), 'public', 'data', 'tables.json');
-		} else {
-			jsonPath = path.join(__dirname, '..', '..', 'public', 'data', 'tables.json');
-		}
+		const jsonPath = app.isPackaged 
+			? path.join(app.getAppPath(), 'public', 'data', 'tables.json')
+			: path.join(process.cwd(), 'public', 'data', 'tables.json');
 
 		if (await this.isEmpty(this.Decembrists_sec_1)) {
 			await this.importDataFromJson(jsonPath);

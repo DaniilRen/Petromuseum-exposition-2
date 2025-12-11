@@ -1,6 +1,0 @@
-#city-map {
-	background-image: url('../../../public/images/maps/city.png');
-	background-size: cover;
-	background-position: center;
-	animation: var(--fade-animation);
-}

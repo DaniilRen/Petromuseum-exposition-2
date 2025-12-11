@@ -1,7 +1,0 @@
-#fortress-map {
-	position: relative;
-	background-image: url('../../../public/images/maps/fortress.png');
-	background-size: cover;
-	background-position: center;
-	animation: var(--fade-animation);
-}

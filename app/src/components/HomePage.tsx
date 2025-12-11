@@ -1,40 +1,82 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TableTabs from './TableTabs';
+import DataTable from './DataTable';
 import './HomePage.css';
+import type { TableType, TabConfig } from '../types';
 
 const HomePage: React.FC = () => {
-	const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<TableType>('Decembrists_sec_4');
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
-	const buttons = [
-		{ id: 1, label: 'места заключения декабристов в Петропавловской крепости' },
-		{ id: 2, label: 'адреса декабристов' },
-		{ id: 3, label: 'памятные места' },
-		{ id: 4, label: 'список осужденных декабристов' },
-		{ id: 5, label: 'документы' },
-		{ id: 6, label: 'Воспоминания' },
-	];
+  const fetchData = useCallback(async (tableName: TableType) => {
+    try {
+      setLoading(true);
+      const result = await window.electronAPI.getRows(tableName);
+      setData(result || []);
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-	return (
-		<div className="container">
-			<div className="poster">
-				<div className="line line-1">ВЫСТАВКА</div>
-				<div className="line line-2">ПЕТЕРБУРГ</div>
-				<div className="line line-3">ДЕКАБРИСТОВ</div>
-			</div>
-			<div className="buttonsGrid">
-				{buttons.map(({ id, label }) => (
-					<button
-						key={id}
-						className="button"
-						data-btn={id}
-						onClick={() => navigate(`/page/${id}`)}
-					>
-						<span>{label}</span>
-					</button>
-				))}
-			</div>
-		</div>
-	);
+  useEffect(() => {
+    fetchData(activeTab);
+  }, [activeTab, fetchData]);
+
+  const tabConfig: readonly TabConfig[] = [
+    {
+      key: 'Decembrists_sec_4',
+      label: 'Decembrists Sec 4',
+      headers: ['Group', 'Info', 'Address', 'Topography'] as const,
+    },
+    {
+      key: 'Documents_sec_5',
+      label: 'Documents Sec 5',
+      headers: ['Image Name', 'Info'] as const,
+    },
+    {
+      key: 'Quotes_sec_6',
+      label: 'Quotes Sec 6',
+      headers: ['Group', 'Text', 'Author'] as const,
+    },
+  ];
+
+  const currentConfig = tabConfig.find((config) => config.key === activeTab)!;
+
+  const displayData = data.map((row) => {
+    if (activeTab === 'Decembrists_sec_4') {
+      return [row.group, row.info, row.address, row.topography];
+    } else if (activeTab === 'Documents_sec_5') {
+      return [row.image_name, row.info];
+    } else {
+      return [row.group, row.text, row.author];
+    }
+  });
+
+  return (
+    <div className="container">
+      <TableTabs
+        // @ts-ignore
+        tabs={tabConfig}
+        activeTab={activeTab}
+        // @ts-ignore
+        onTabChange={setActiveTab}
+      />
+      <DataTable
+        data={displayData}
+        // @ts-ignore
+        headers={currentConfig.headers}
+        loading={loading}
+        emptyMessage={`No data in ${activeTab}`}
+        activeTab={activeTab}
+        originalData={data} // Pass original data for edit
+      />
+    </div>
+  );
 };
 
 export default HomePage;

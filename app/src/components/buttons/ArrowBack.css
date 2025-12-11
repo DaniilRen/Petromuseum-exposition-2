@@ -7,7 +7,7 @@
 	cursor: 'pointer';
 	font-size: var(--back-button-font-size);
 	transform: rotate(180deg);
-	padding: 0px 30px;
+	padding: 10px 30px;
 	margin: 10px 20px;
 	border-radius: var(--default-radius);
 	background-color: var(--white);

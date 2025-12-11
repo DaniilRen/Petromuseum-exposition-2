@@ -52,10 +52,24 @@ app.whenReady().then(async () => {
 	});
 
 	ipcMain.handle('update-row', async (_event, tableName: string, row: any) => {
-	if (!row.id) throw new Error('id is required for update');
-	// @ts-ignore
-	return db!.updateRow(db[tableName], row);
+		console.log('Update row received:', row); // Debug log
+		
+		if (row.id && !row._id) {
+			row._id = row.id;
+		}
+		if (!row._id && !row.id) {
+			throw new Error('Row must have id or _id for update');
+		}
+		
+		// @ts-ignore
+		const collection = db![tableName];
+		if (!collection) {
+			throw new Error(`Collection ${tableName} not found`);
+		}
+
+		return await db!.updateRow(collection, row);
 	});
+
 
 	ipcMain.handle('delete-row', async (_event, tableName: string, id: string) => {
 	// @ts-ignore
