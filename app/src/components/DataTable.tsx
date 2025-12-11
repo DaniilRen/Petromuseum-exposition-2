@@ -7,9 +7,11 @@ interface DataTableProps {
     headers: string[];
     loading: boolean;
     emptyMessage: string;
-    activeTab?: TableType;
-    originalData: any[]; // Add original data for edit
+    activeTab?: string; // Changed from TableType to string
+    originalData: any[];
+    onDeleteRow?: (tableName: string, id: string) => Promise<void>; // ✅ string, not TableType
 }
+
 
 const DataTable: React.FC<DataTableProps> = ({ 
     data, 
@@ -17,21 +19,37 @@ const DataTable: React.FC<DataTableProps> = ({
     loading, 
     emptyMessage, 
     activeTab,
-    originalData 
+    originalData,
+    onDeleteRow 
 }) => {
     const navigate = useNavigate();
 
     const handleEdit = (rowIndex: number) => {
-        if (!activeTab || !originalData[rowIndex]) {
-            console.error('Missing table name or row data');
+        if (!activeTab || !originalData[rowIndex]) return;
+        navigate(`/edit/${activeTab}/${rowIndex}`, { 
+            state: { fullRow: originalData[rowIndex], tableName: activeTab } 
+        });
+    };
+
+    const handleDelete = async (rowIndex: number) => {
+        if (!activeTab || !originalData[rowIndex] || !onDeleteRow) return;
+        
+        if (!confirm(`Delete "${originalData[rowIndex].group || originalData[rowIndex].image_name || originalData[rowIndex].text || 'this row'}"?`)) {
             return;
         }
-        navigate(`/edit/${activeTab}/${rowIndex}`, { 
-            state: { 
-                fullRow: originalData[rowIndex],
-                tableName: activeTab 
-            } 
-        });
+
+        try {
+            const id = originalData[rowIndex]._id || originalData[rowIndex].id;
+            await onDeleteRow(activeTab, id);
+        } catch (error) {
+            console.error('Delete failed:', error);
+            alert('Failed to delete row');
+        }
+    };
+
+    const handleAddNew = () => {
+        if (!activeTab) return;
+        navigate(`/add/${activeTab}`, { state: { tableName: activeTab } });
     };
 
     if (loading) {
@@ -45,13 +63,23 @@ const DataTable: React.FC<DataTableProps> = ({
     if (data.length === 0) {
         return (
             <div className="table empty">
-                <div className="empty-message">{emptyMessage}</div>
+                <div className="empty-message">
+                    {emptyMessage}
+                    <button className="add-new-btn" onClick={handleAddNew}>
+                        ➕ Add First Row
+                    </button>
+                </div>
             </div>
         );
     }
 
     return (
         <div className="table">
+            <div className="table-header-row">
+                <button className="add-new-btn" onClick={handleAddNew}>
+                    ➕ Add New Row
+                </button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -68,16 +96,28 @@ const DataTable: React.FC<DataTableProps> = ({
                                 <td key={cellIndex}>{cell || '-'}</td>
                             ))}
                             <td className="actions-cell">
-                                <button 
-                                    className="edit-btn"
-                                    onClick={() => handleEdit(rowIndex)}
-                                    title="Edit row"
-                                >
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                </button>
+                                <div className="action-buttons">
+                                    <button 
+                                        className="edit-btn"
+                                        onClick={() => handleEdit(rowIndex)}
+                                        title="Edit row"
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                    <button 
+                                        className="delete-btn"
+                                        onClick={() => handleDelete(rowIndex)}
+                                        title="Delete row"
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}

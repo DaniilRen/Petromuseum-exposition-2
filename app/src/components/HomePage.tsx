@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import TableTabs from './TableTabs';
 import DataTable from './DataTable';
 import './HomePage.css';
@@ -57,6 +56,11 @@ const HomePage: React.FC = () => {
     }
   });
 
+  const handleDeleteRow = async (tableName: string, id: string): Promise<void> => {
+    await window.electronAPI.deleteRow(tableName, id);
+    await fetchData(tableName as TableType);
+  };
+
   return (
     <div className="container">
       <TableTabs
@@ -66,15 +70,16 @@ const HomePage: React.FC = () => {
         // @ts-ignore
         onTabChange={setActiveTab}
       />
-      <DataTable
+    <DataTable
         data={displayData}
         // @ts-ignore
         headers={currentConfig.headers}
         loading={loading}
         emptyMessage={`No data in ${activeTab}`}
         activeTab={activeTab}
-        originalData={data} // Pass original data for edit
-      />
+        originalData={data}
+        onDeleteRow={handleDeleteRow} // Add this
+    />
     </div>
   );
 };

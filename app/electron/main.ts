@@ -42,13 +42,13 @@ app.whenReady().then(async () => {
 
 	// IPC handlers for renderer process to invoke DB operations
 	ipcMain.handle('get-rows', async (_event, tableName: string) => {
-	// @ts-ignore
-	return db![tableName].find({});
+		// @ts-ignore
+		return db![tableName].find({});
 	});
 
 	ipcMain.handle('add-row', async (_event, tableName: string, row: any) => {
-	// @ts-ignore
-	return db![tableName].insert(row);
+		// @ts-ignore
+		return db![tableName].insert(row);
 	});
 
 	ipcMain.handle('update-row', async (_event, tableName: string, row: any) => {
@@ -72,9 +72,11 @@ app.whenReady().then(async () => {
 
 
 	ipcMain.handle('delete-row', async (_event, tableName: string, id: string) => {
-	// @ts-ignore
-	return db!.deleteRow(db[tableName], id);
+		// @ts-ignore
+		await db![tableName].remove({ _id: id }, {});
+		return { success: true };
 	});
+
 	createWindow();
 });
 

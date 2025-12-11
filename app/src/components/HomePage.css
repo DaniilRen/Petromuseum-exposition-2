@@ -155,3 +155,87 @@
 .edit-btn svg {
     stroke: currentColor;
 }
+
+.table-header-row {
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.add-new-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-new-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(40,167,69,0.3);
+}
+
+.empty .add-new-btn {
+    margin-top: 16px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.edit-btn {
+    color: #6c757d;
+}
+
+.edit-btn:hover {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.delete-btn {
+    color: #dc3545;
+}
+
+.delete-btn:hover {
+    background: #fdf2f2;
+    color: #c82333;
+    transform: scale(1.05);
+}
+
+.delete-btn svg {
+    stroke: currentColor;
+}
+
+.table th.actions-header,
+.table td.actions-cell {
+    width: 90px; /* Wider for two buttons */
+    text-align: center;
+    padding: 12px 8px !important;
+}
